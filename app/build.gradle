@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        configk {
+            keyAlias 'k'
+            keyPassword 'cnkk312'
+            storeFile file('C:/Users/Administrator/kkeystore.jks')
+            storePassword 'cnkk312'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.k.xdiary"
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.configk
+        }
+        debug {
+            signingConfig signingConfigs.configk
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'SwipeBackLayout-V1.1.0', ext: 'aar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile files('libs/gson-2.3.1.jar')
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.6.6'
+}
