@@ -1,9 +1,10 @@
-package com.k.xdiary.main;
+package com.k.xdiary.ui.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 	private int totalScrollRange = -1;
 	public String currentAqi = "ffffff";
 	private float currentExpd = 0;
+	public FloatingActionButton mFab;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 	@Override
 	public void initView(View view) {
 		mSwipeBackLayout.setEnableGesture(false);
+		mFab = (FloatingActionButton) findViewById(R.id.main_fb);
+		mFab.setOnClickListener(new FabClick());
 		Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(mToolbar);
 		main_appbar_tv = (TextView) findViewById(R.id.main_appbar_tv);
@@ -69,7 +73,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 		//扩张颜色
 		mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 		//收缩后在Toolbar上显示时的title的颜色
-		mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
+		mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#90000000"));
 		mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), mContext);
 		mViewPager = (ViewPager) findViewById(R.id.viewPager);
 		mViewPager.setAdapter(mainPagerAdapter);
@@ -103,6 +107,21 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 			main_qualities.setTextColor(Color.parseColor("#" + xi + currentAqi));
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	class FabClick implements View.OnClickListener {
+
+		@Override
+		public void onClick(View view) {
+			switch (mViewPager.getCurrentItem()) {
+				case 0:
+//					Intent intent = new Intent();
+//					intent.setClass(mContext, AddCityActivity.class);
+//					Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle();
+//					startActivity(intent, bundle);
+					break;
+			}
 		}
 	}
 }

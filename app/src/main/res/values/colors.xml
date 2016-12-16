@@ -8,6 +8,7 @@
     <color name="lightblack">#34495e</color>
     <color name="gray">#B7B7B7</color>
     <color name="bottom_blue">#104654</color>
+    <color name="transparent">#00000000</color>
 
 
     <color name="quality_a">#47d341</color>

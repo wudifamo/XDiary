@@ -1,24 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/weather_fl"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/bottom_blue">
-
-    <!-- TODO: Update blank fragment layout -->
-    <com.k.xdiary.views.MyNestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1100dp"
-                android:gravity="center"
-                android:text="@string/hello_blank_fragment"/>
-        </LinearLayout>
-    </com.k.xdiary.views.MyNestedScrollView>
-</FrameLayout>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/weather_recyclerview"
+                                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@mipmap/mbg">
+</android.support.v7.widget.RecyclerView>

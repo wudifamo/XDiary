@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.k.xdiary.main.MainActivity;
+import com.k.xdiary.ui.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

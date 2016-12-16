@@ -18,6 +18,9 @@ import okhttp3.Response;
 
 public class HttpUtils {
 
+	public static String MY_WEATHER_KEY = "aadd7cbeac164f948a377148135461bb";
+	public static String SEE_WEATHER_KEY = "282f3846df6b41178e4a2218ae083ea7";
+
 	public static void getAsynHttp(String url, String[] keys, String[] values, final Handler handler) {
 		OkHttpClient mOkHttpClient = new OkHttpClient();
 		StringBuilder stringBuilder = new StringBuilder(url);
@@ -42,8 +45,8 @@ public class HttpUtils {
 
 			@Override
 			public void onResponse(Call call, Response response) throws IOException {
-				Message message=new Message();
-				message.obj=response.body().string();
+				Message message = new Message();
+				message.obj = response.body().string();
 				handler.sendMessage(message);
 			}
 		});
