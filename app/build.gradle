@@ -6,7 +6,7 @@ android {
         configk {
             keyAlias 'k'
             keyPassword 'cnkk312'
-            storeFile file('C:/Users/Administrator/kkeystore.jks')
+            storeFile file('C:/kkeystore.jks')
             storePassword 'cnkk312'
         }
     }
