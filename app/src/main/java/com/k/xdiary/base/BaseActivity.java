@@ -9,11 +9,15 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.google.gson.Gson;
+import com.k.xdiary.R;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -44,6 +48,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
 	protected final String TAG = this.getClass().getSimpleName();
 	protected SwipeBackLayout mSwipeBackLayout;
 	protected Context mContext;
+	protected Gson gson = new Gson();
+	protected Toolbar mToolBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,10 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
 				steepStatusBar();
 			}
 			setContentView(mContextView);
+			mToolBar = (Toolbar) findViewById(R.id.toolbar);
+			if (mToolBar != null) {
+				setSupportActionBar(mToolBar);
+			}
 			if (!isAllowScreenRoate) {
 				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 			} else {
