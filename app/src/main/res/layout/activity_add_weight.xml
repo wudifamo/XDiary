@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="12321321"
-            app:met_floatingLabel="highlight"/>
+            app:met_floatingLabel="highlight"
+            android:id="@+id/materialEditText"/>
     </LinearLayout>
 </LinearLayout>
