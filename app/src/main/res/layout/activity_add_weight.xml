@@ -22,9 +22,10 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/addweather_dateet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Highlight Floating Label"
+            android:hint="date"
             app:met_floatingLabel="highlight"/>
 
 
@@ -34,5 +35,15 @@
             android:hint="12321321"
             app:met_floatingLabel="highlight"
             android:id="@+id/materialEditText"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="12321321"
+            app:met_floatingLabel="highlight"/>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="12321321"
+            app:met_floatingLabel="highlight"/>
     </LinearLayout>
 </LinearLayout>
