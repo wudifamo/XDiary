@@ -10,4 +10,17 @@
     android:paddingTop="25dp"
     app:layout_scrollFlags="scroll|enterAlways|snap"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <Button
+        android:id="@+id/toolbar_btnRight"
+        style="@android:style/Widget.ActionButton.Overflow"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+</android.support.v7.widget.Toolbar>

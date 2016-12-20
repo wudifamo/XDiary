@@ -203,12 +203,6 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 				main_appbar_tv.setText(tmpBean.getMax() + "/" + tmpBean.getMin());
 				main_qualities.setText("AQI " + aqiBean.getAqi() + "\n" + "PM2.5 " + aqiBean.getPm25());
 				setChart(weather5Bean.getDaily_forecast());
-				Snackbar.make(mDrawerLayout, "connection success", Snackbar.LENGTH_LONG).setAction("retry", new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						//tv.setText("aleady click snackbar");
-					}
-				}).show();
 			} else {
 				Snackbar.make(mDrawerLayout, "connection error", Snackbar.LENGTH_LONG).setAction("retry", new View.OnClickListener() {
 					@Override

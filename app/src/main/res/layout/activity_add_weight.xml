@@ -20,36 +20,42 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <android.support.v7.widget.CardView
-            android:id="@+id/addweather_dateCv"
+            android:id="@+id/addweight_dateCv"
             android:layout_width="match_parent"
             android:layout_height="88dp"
             android:foreground="?attr/selectableItemBackground"
             app:cardElevation="10dp">
 
             <TextView
-                android:id="@+id/addweather_datetv"
+                android:id="@+id/addweight_datetv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:clickable="true"
-                android:text="12312312"/>
+                android:clickable="true"/>
 
 
         </android.support.v7.widget.CardView>
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/materialEditText"
+            android:id="@+id/addweight_weight"
             style="@style/addweatherEditText"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:hint="weight"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/addweight_situp"
+            style="@style/addweatherEditText"
             android:hint="situp"
-            android:inputType="number"
-            style="@style/addweatherEditText"/>
+            android:inputType="number"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:hint="run"
-            style="@style/addweatherEditText"/>
+            android:id="@+id/addweight_run"
+            style="@style/addweatherEditText"
+            android:hint="run"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/addweight_other"
+            style="@style/addweatherEditText"
+            android:hint="other"/>
     </LinearLayout>
 </LinearLayout>

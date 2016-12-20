@@ -9,36 +9,48 @@ import io.realm.annotations.PrimaryKey;
 
 public class WeightBean extends RealmObject {
 
-	private String weight;
+	private double weight;
 	private int situp;
-	private String plank;
+	private double run;
 	private double sum;
 	private String other;
 	@PrimaryKey
 	private String date;
 
-	public String getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
 	public void setWeight(String weight) {
-		this.weight = weight;
+		if (weight.length() > 0) {
+			this.weight = Double.valueOf(weight);
+		} else {
+			this.weight = 0;
+		}
 	}
 
 	public int getSitup() {
 		return situp;
 	}
 
-	public void setSitup(int situp) {
-		this.situp = situp;
+	public void setSitup(String situp) {
+		if (situp.length() > 0) {
+			this.situp = Integer.valueOf(situp);
+		} else {
+			this.situp = 0;
+		}
 	}
 
-	public String getPlank() {
-		return plank;
+	public double getRun() {
+		return run;
 	}
 
-	public void setPlank(String plank) {
-		this.plank = plank;
+	public void setRun(String run) {
+		if (run.length() > 0) {
+			this.run = Double.valueOf(run);
+		} else {
+			this.run = 0;
+		}
 	}
 
 	public double getSum() {
