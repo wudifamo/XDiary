@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".ui.weight.AddWeightActivity">
         </activity>
+        <activity android:name=".ui.diary.DiaryActivity">
+        </activity>
     </application>
 
 </manifest>

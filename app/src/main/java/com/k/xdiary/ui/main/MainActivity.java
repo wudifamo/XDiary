@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.k.xdiary.R;
 import com.k.xdiary.base.BaseActivity;
 import com.k.xdiary.bean.WeatherBean;
+import com.k.xdiary.ui.diary.DiaryActivity;
 import com.k.xdiary.ui.weight.WeightActivity;
 import com.k.xdiary.utils.HttpUtils;
 import com.k.xdiary.utils.ViewUtils;
@@ -44,7 +45,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 	private LineChartView mChart;
 	private DrawerLayout mDrawerLayout;
 	private CollapsingToolbarLayout mCollapsingToolbarLayout;
-	private CardView cardView1;
+	private CardView cardView1, cardView2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 	public void initView(View view) {
 		mSwipeBackLayout.setEnableGesture(false);
 		cardView1 = (CardView) findViewById(R.id.main_card1);
+		cardView2 = (CardView) findViewById(R.id.main_card2);
 		mChart = (LineChartView) view.findViewById(R.id.weather_chart);
 		Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
 		setSupportActionBar(mToolbar);
@@ -95,6 +97,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 		mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#90000000"));
 
 		cardView1.setOnClickListener(this);
+		cardView2.setOnClickListener(this);
 	}
 
 	@Override
@@ -163,6 +166,9 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 				startActivity(WeightActivity.class);
 //				startActivity(new Intent(mContext, WeightActivity.class), ActivityOptions.makeSceneTransitionAnimation(this, cardView1, "weight")
 //						.toBundle());
+				break;
+			case R.id.main_card2:
+				startActivity(DiaryActivity.class);
 				break;
 		}
 	}

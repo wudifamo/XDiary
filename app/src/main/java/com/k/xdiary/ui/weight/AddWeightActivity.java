@@ -93,6 +93,7 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 		StringBuilder sb = new StringBuilder();
 		sb.append(year);
 		sb.append("-");
+		month++;
 		if (month < 10) {
 			sb.append("0");
 		}

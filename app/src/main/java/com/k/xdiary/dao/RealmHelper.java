@@ -62,8 +62,15 @@ public class RealmHelper {
 
 	}
 
+	public static <E extends RealmModel> RealmResults<E> queryAll(Class<E> eClass) {
+		Realm mRealm = Realm.getDefaultInstance();
+		RealmResults<E> weightList = mRealm.where(eClass).findAll();
+		return weightList;
+	}
+
 	//////从查询的所有数据中取出需要的。(脱离Realm的控制)
-	public static <E extends RealmModel> List<E> getLimitList(RealmResults<E> data, int offset, int limit) {
+	public static <E extends RealmModel> List<E> getLimitList(RealmResults<E> data, int currentPage, int limit) {
+		int offset = currentPage * limit;
 		List<E> obtainList = new ArrayList();
 		Realm realm = Realm.getDefaultInstance();
 		if (data.size() == 0) {
