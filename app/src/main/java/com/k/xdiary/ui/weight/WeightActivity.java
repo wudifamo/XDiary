@@ -28,7 +28,6 @@ import io.realm.RealmResults;
 public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAdapter.RequestLoadMoreListener {
 	private ArrayList<WeightBean> weightList = new ArrayList<>();
 	private RealmResults<WeightBean> listAll;
-	private int currentPage = 0;
 	private LinearLayoutManager layoutManager;
 
 	@Override
@@ -45,7 +44,6 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 		recyclerView.setLayoutManager(layoutManager);
 		//设置为垂直布局，这也是默认的
 		layoutManager.setOrientation(OrientationHelper.VERTICAL);
-		recyclerView.setHasFixedSize(true);
 		//设置分隔线
 		//recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
 		//设置增加或删除条目的动画
@@ -89,15 +87,12 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 
 	@Override
 	public void refreshData() {
-		super.refreshData();
 		currentPage = 0;
 		listAll = RealmHelper.queryAll(WeightBean.class);
 		weightList.clear();
 		weightList.addAll(RealmHelper.getLimitList(listAll, currentPage, 10));
 		mAdapter.setNewData(weightList);
-		mAdapter.setEnableLoadMore(false);
-		mAdapter.setEnableLoadMore(true);
-		mSwipeRefreshLayout.setRefreshing(false);
+		super.refreshData();
 	}
 
 	OnItemSwipeListener onItemSwipeListener = new OnItemSwipeListener() {
@@ -107,12 +102,23 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 
 		@Override
 		public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-			mSwipeRefreshLayout.setEnabled(true);
+			mAdapter.notifyItemChanged(0);
 		}
 
 		@Override
 		public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
-			Log.i("---", pos + "");
+			if (pos > 0) {
+				double ss=weightList.get(pos-1).getSum();
+				weightList.get(pos - 1).setSum(RealmHelper.deleteWeight(weightList.get(pos).getDate()));
+				double s1s=weightList.get(pos-1).getSum();
+				Log.i("---", pos + "");
+			} else {
+				RealmHelper.deleteWeight(weightList.get(pos).getDate());
+			}
+			if (weightList.size() < 2) {
+				mAdapter.setEnableLoadMore(false);
+			}
+			mAdapter.setEnableLoadMore(false);
 		}
 
 		@Override

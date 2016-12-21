@@ -4,6 +4,10 @@ import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Administrator on 2016/12/15.
  */
@@ -36,5 +40,21 @@ public class BaseUtils {
 			snackbar.setAction(objects[0].toString(), (View.OnClickListener) objects[1]);
 		}
 		snackbar.show();
+	}
+
+	public static Date string2date(String dateStr) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		try {
+			date = sdf.parse(dateStr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+
+	public static String date2string(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(date);
 	}
 }

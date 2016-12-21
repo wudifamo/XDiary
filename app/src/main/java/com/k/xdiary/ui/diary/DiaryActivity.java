@@ -29,25 +29,27 @@ public class DiaryActivity extends RecyclerBaseActivity {
 	public void initView(View view) {
 		mAdapter = new WeightAdapter(mContext, weightList);
 		super.initView(view);
-		layoutManager=new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+		layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 		recyclerView.setLayoutManager(layoutManager);
-		recyclerView.setHasFixedSize(true);
 		mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
-		layoutManager.findFirstVisibleItemPositions(null);
 		mAdapter.enableSwipeItem();
 	}
 
 	@Override
 	public void doBusiness() {
-		weightList.clear();
-		weightList.addAll(RealmHelper.queryAllWeight());
-		mAdapter.setNewData(weightList);
-		mAdapter.setEnableLoadMore(false);
-		mAdapter.setEnableLoadMore(true);
+		refreshData();
 	}
 
 	@Override
 	public void widgetClick(View v) {
 
+	}
+
+	@Override
+	public void refreshData() {
+		weightList.clear();
+		weightList.addAll(RealmHelper.queryAllWeight());
+		mAdapter.setNewData(weightList);
+		super.refreshData();
 	}
 }

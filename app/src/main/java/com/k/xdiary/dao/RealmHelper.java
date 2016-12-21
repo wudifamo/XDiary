@@ -2,6 +2,7 @@ package com.k.xdiary.dao;
 
 import com.k.xdiary.bean.WeightBean;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +22,35 @@ public class RealmHelper {
 	 */
 	public static void addWeight(WeightBean weightBean) {
 		Realm mRealm = Realm.getDefaultInstance();
+		RealmResults<WeightBean> lasts = mRealm.where(WeightBean.class).lessThan("date", weightBean.getDate()).findAllSorted("date", Sort
+				.DESCENDING);
+		double sum = 0;
+		if (lasts.size() > 0) {
+			WeightBean lastWeight = lasts.get(0);
+			sum = getSum(weightBean.getWeight(), lastWeight.getWeight());
+		}
+
 		WeightBean sweight = mRealm.where(WeightBean.class).equalTo("date", weightBean.getDate()).findFirst();
+		WeightBean tWeight = mRealm.where(WeightBean.class).greaterThan("date", weightBean.getDate()).findFirst();
+
 		mRealm.beginTransaction();
+
+
 		if (sweight != null) {
-			sweight.setWeight(String.valueOf(weightBean.getWeight()));
+			sweight.setWeight(weightBean.getWeight());
 			sweight.setOther(String.valueOf(weightBean.getOther()));
 			sweight.setRun(String.valueOf(weightBean.getRun()));
 			sweight.setSitup(String.valueOf(weightBean.getSitup()));
+			sweight.setSum(sum);
 		} else {
+			weightBean.setSum(sum);
 			mRealm.copyToRealm(weightBean);
 		}
+
+		if (tWeight != null) {
+			tWeight.setSum(getSum(tWeight.getWeight(), weightBean.getWeight()));
+		}
+
 		mRealm.commitTransaction();
 	}
 
@@ -53,18 +73,30 @@ public class RealmHelper {
 	/**
 	 * delete （删）
 	 */
-	public static void deleteWeight(String date) {
+	public static double deleteWeight(long date) {
 		Realm mRealm = Realm.getDefaultInstance();
 		WeightBean weightBean = mRealm.where(WeightBean.class).equalTo("date", date).findFirst();
+		WeightBean tWeight = mRealm.where(WeightBean.class).greaterThan("date", date).findFirst();
+		RealmResults<WeightBean> lasts = mRealm.where(WeightBean.class).lessThan("date", date).findAllSorted("date", Sort
+				.DESCENDING);
+		double sum = 0;
+		if (tWeight != null && lasts.size() > 0) {
+			WeightBean lastWeight = lasts.get(0);
+			sum = getSum(tWeight.getWeight(), lastWeight.getWeight());
+		}
 		mRealm.beginTransaction();
 		weightBean.deleteFromRealm();
+		if (tWeight != null) {
+			tWeight.setSum(sum);
+		}
 		mRealm.commitTransaction();
-
+		return sum;
 	}
 
 	public static <E extends RealmModel> RealmResults<E> queryAll(Class<E> eClass) {
 		Realm mRealm = Realm.getDefaultInstance();
 		RealmResults<E> weightList = mRealm.where(eClass).findAll();
+		weightList = weightList.sort("date", Sort.DESCENDING);
 		return weightList;
 	}
 
@@ -85,6 +117,12 @@ public class RealmHelper {
 		}
 		realm.close();
 		return obtainList;
+	}
+
+	public static double getSum(String arg1, String arg2) {
+		BigDecimal a1 = new BigDecimal(arg1);
+		BigDecimal b1 = new BigDecimal(arg2);
+		return a1.subtract(b1).doubleValue();
 	}
 
 }

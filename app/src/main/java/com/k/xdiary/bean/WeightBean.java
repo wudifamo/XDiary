@@ -1,5 +1,9 @@
 package com.k.xdiary.bean;
 
+import com.k.xdiary.utils.BaseUtils;
+
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -9,24 +13,28 @@ import io.realm.annotations.PrimaryKey;
 
 public class WeightBean extends RealmObject {
 
-	private double weight;
+	private String weight;
 	private int situp;
 	private double run;
 	private double sum;
 	private String other;
 	@PrimaryKey
-	private String date;
+	private long date;
 
-	public double getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
 	public void setWeight(String weight) {
-		if (weight.length() > 0) {
-			this.weight = Double.valueOf(weight);
-		} else {
-			this.weight = 0;
-		}
+		this.weight = weight;
+	}
+
+	public void setSitup(int situp) {
+		this.situp = situp;
+	}
+
+	public void setRun(double run) {
+		this.run = run;
 	}
 
 	public int getSitup() {
@@ -69,11 +77,16 @@ public class WeightBean extends RealmObject {
 		this.other = other;
 	}
 
-	public String getDate() {
+	public long getDate() {
 		return date;
 	}
 
+	public String getStringDate() {
+		return BaseUtils.date2string(new Date(date));
+	}
+
 	public void setDate(String date) {
-		this.date = date;
+
+		this.date = BaseUtils.string2date(date).getTime();
 	}
 }

@@ -21,6 +21,13 @@ public class WeightAdapter extends BaseItemDraggableAdapter<WeightBean, BaseView
 
 	@Override
 	protected void convert(BaseViewHolder helper, WeightBean item) {
-		helper.setText(R.id.witem_tv, item.getDate());
+		helper.setText(R.id.witem_tv0, item.getStringDate())
+				.setText(R.id.witem_tv, item.getWeight())
+				.setText(R.id.witem_tv2, item.getSum() + "");
+		if (item.getSum() > 0) {
+			helper.setText(R.id.witem_tv1, "↑");
+		} else {
+			helper.setText(R.id.witem_tv1, "↓");
+		}
 	}
 }

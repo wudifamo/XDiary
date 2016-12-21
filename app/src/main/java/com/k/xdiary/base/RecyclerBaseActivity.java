@@ -21,6 +21,7 @@ public class RecyclerBaseActivity extends BaseActivity implements MySwipeRefresh
 	protected MySwipeRefreshLayout mSwipeRefreshLayout;
 	protected FloatingActionButton mFab;
 	protected BaseItemDraggableAdapter mAdapter;
+	protected int currentPage = 0;
 
 	@Override
 	public void initParms(Bundle parms) {
@@ -38,11 +39,13 @@ public class RecyclerBaseActivity extends BaseActivity implements MySwipeRefresh
 		mFab.setOnClickListener(this);
 		AppBarLayout appbar_layout = (AppBarLayout) findViewById(R.id.weight_appbar);
 		appbar_layout.addOnOffsetChangedListener(this);
-		recyclerView = (RecyclerView) findViewById(R.id.weight_recyclerview);
 		mSwipeRefreshLayout = (MySwipeRefreshLayout) findViewById(R.id.weight_swipeLayout);
 		mSwipeRefreshLayout.setOnRefreshListener(this);
 		mSwipeRefreshLayout.setmRecyclerView(recyclerView);
 		//mSwipeRefreshLayout.setColorSchemeResources(R.color.swiperefresh_color1, R.color.swiperefresh_color2, R.color.swipe
+		mAdapter.isFirstOnly(false);
+		recyclerView = (RecyclerView) findViewById(R.id.weight_recyclerview);
+		recyclerView.setHasFixedSize(true);
 		recyclerView.post(new Runnable() {
 			@Override
 			public void run() {
@@ -50,7 +53,6 @@ public class RecyclerBaseActivity extends BaseActivity implements MySwipeRefresh
 				mSwipeRefreshLayout.setProgressViewOffset(true, rt, rt + 100);
 			}
 		});
-		mAdapter.isFirstOnly(false);
 		recyclerView.setAdapter(mAdapter);
 		ItemDragAndSwipeCallback mItemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mAdapter);
 		ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemDragAndSwipeCallback);
@@ -90,7 +92,9 @@ public class RecyclerBaseActivity extends BaseActivity implements MySwipeRefresh
 		}
 	}
 
-	public void refreshData(){
-
+	public void refreshData() {
+		mAdapter.setEnableLoadMore(false);
+		mAdapter.setEnableLoadMore(true);
+		mSwipeRefreshLayout.setRefreshing(false);
 	}
 }

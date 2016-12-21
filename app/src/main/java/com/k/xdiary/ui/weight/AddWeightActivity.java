@@ -1,6 +1,7 @@
 package com.k.xdiary.ui.weight;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,16 +71,19 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 				dpd.show(getFragmentManager(), "Datepickerdialog");
 				break;
 			case R.id.toolbar_btnRight:
-				WeightBean weightBean = new WeightBean();
-				weightBean.setDate(dateTv.getText().toString());
-				weightBean.setWeight(weightEt.getText().toString());
-				weightBean.setSitup(sitEt.getText().toString());
-				weightBean.setRun(runEt.getText().toString());
-				weightBean.setOther(otherEt.getText().toString());
-				RealmHelper realmHelper = new RealmHelper();
-				realmHelper.addWeight(weightBean);
-				setResult(1);
-				finish();
+				if (TextUtils.isEmpty(weightEt.getText().toString())) {
+					weightEt.setError("can't null");
+				} else {
+					WeightBean weightBean = new WeightBean();
+					weightBean.setDate(dateTv.getText().toString());
+					weightBean.setWeight(weightEt.getText().toString());
+					weightBean.setSitup(sitEt.getText().toString());
+					weightBean.setRun(runEt.getText().toString());
+					weightBean.setOther(otherEt.getText().toString());
+					RealmHelper.addWeight(weightBean);
+					setResult(1);
+					finish();
+				}
 				break;
 		}
 	}
