@@ -102,7 +102,6 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 
 		@Override
 		public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
-			mAdapter.notifyItemChanged(0);
 		}
 
 		@Override
