@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 	private LineChartView mChart;
 	private DrawerLayout mDrawerLayout;
 	private CollapsingToolbarLayout mCollapsingToolbarLayout;
-	private CardView cardView1, cardView2;
+	private CardView cardView1, cardView2, cardView3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 		mSwipeBackLayout.setEnableGesture(false);
 		cardView1 = (CardView) findViewById(R.id.main_card1);
 		cardView2 = (CardView) findViewById(R.id.main_card2);
+		cardView3 = (CardView) findViewById(R.id.main_card3);
 		mChart = (LineChartView) view.findViewById(R.id.weather_chart);
 		Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
 		setSupportActionBar(mToolbar);
@@ -98,6 +99,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 
 		cardView1.setOnClickListener(this);
 		cardView2.setOnClickListener(this);
+		cardView3.setOnClickListener(this);
 	}
 
 	@Override
@@ -169,6 +171,8 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 				break;
 			case R.id.main_card2:
 				startActivity(DiaryActivity.class);
+				break;
+			case R.id.main_card3:
 				break;
 		}
 	}

@@ -3,13 +3,11 @@ package com.k.xdiary.ui.weight;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
@@ -45,15 +43,17 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 		//设置为垂直布局，这也是默认的
 		layoutManager.setOrientation(OrientationHelper.VERTICAL);
 		//设置分隔线
-		//recyclerView.addItemDecoration(new DividerGridItemDecoration(this));
+		//recyclerView.addItemDecoration(new RecyclerViewDivider(mContext, LinearLayoutManager.VERTICAL));
 		//设置增加或删除条目的动画
 		//recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-		View headerView = View.inflate(mContext, R.layout.card_temp, null);
-		headerView.setLayoutParams(new DrawerLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, BaseUtils.dip2px(mContext, 100)));
 		mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
-		mAdapter.addHeaderView(headerView);
-
+		mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+			@Override
+			public void onChanged() {
+				headersDecor.invalidateHeaders();
+			}
+		});
 		// 开启滑动删除
 		mAdapter.enableSwipeItem();
 		mAdapter.setOnItemSwipeListener(onItemSwipeListener);
@@ -107,9 +107,9 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 		@Override
 		public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
 			if (pos > 0) {
-				double ss=weightList.get(pos-1).getSum();
+				double ss = weightList.get(pos - 1).getSum();
 				weightList.get(pos - 1).setSum(RealmHelper.deleteWeight(weightList.get(pos).getDate()));
-				double s1s=weightList.get(pos-1).getSum();
+				double s1s = weightList.get(pos - 1).getSum();
 				Log.i("---", pos + "");
 			} else {
 				RealmHelper.deleteWeight(weightList.get(pos).getDate());
@@ -122,9 +122,6 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 
 		@Override
 		public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float v, float v1, boolean b) {
-			if (b) {
-				mSwipeRefreshLayout.setEnabled(false);
-			}
 		}
 	};
 
