@@ -24,12 +24,6 @@
         <include layout="@layout/card_temp"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/weight_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/weight_fb"
         android:layout_width="wrap_content"
@@ -37,4 +31,10 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         app:layout_behavior="com.k.xdiary.behavior.ScrollAwareFABBehavior"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/weight_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 </android.support.design.widget.CoordinatorLayout>
