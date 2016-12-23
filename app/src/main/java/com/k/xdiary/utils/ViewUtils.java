@@ -1,5 +1,7 @@
 package com.k.xdiary.utils;
 
+import com.k.xdiary.R;
+
 import java.util.HashMap;
 
 /**
@@ -19,6 +21,22 @@ public class ViewUtils {
 			put("严重污染", "7e0123");
 		}
 	};
+
+	public static int getWeatherIcon(String wStr) {
+		if (wStr.contains("雷")) {
+			return R.drawable.weather_thunder;
+		} else if (wStr.contains("阴") || wStr.contains("云")) {
+			return R.drawable.weather_cloud;
+		} else if (wStr.contains("雨")) {
+			return R.drawable.weather_rain;
+		} else if (wStr.contains("雪")) {
+			return R.drawable.weather_snow;
+		} else if (wStr.contains("雾") || wStr.contains("霾")) {
+			return R.drawable.weather_pm;
+		} else {
+			return R.drawable.weather_sunny;
+		}
+	}
 
 
 }

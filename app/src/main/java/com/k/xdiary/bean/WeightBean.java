@@ -18,6 +18,8 @@ public class WeightBean extends RealmObject {
 	private double run;
 	private double sum;
 	private String other;
+	private int weather;
+	private String tmp;
 	@PrimaryKey
 	private long date;
 
@@ -83,6 +85,11 @@ public class WeightBean extends RealmObject {
 
 	public String getStringDate() {
 		return BaseUtils.date2string(new Date(date));
+	}
+
+	public String getEnDate() {
+
+		return BaseUtils.date2stringEn(new Date(date));
 	}
 
 	public void setDate(String date) {

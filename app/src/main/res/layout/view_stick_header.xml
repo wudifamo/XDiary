@@ -3,20 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryLight"
+    android:layout_height="25dp"
+    android:background="@drawable/divider_gradient_light"
     android:paddingLeft="4dp">
 
     <TextView
         android:id="@+id/header_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_margin="4dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         android:textStyle="bold"
         tools:text="Animals starting with A"/>
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="76dp"
+        android:background="@color/colorAccent"/>
 </FrameLayout>

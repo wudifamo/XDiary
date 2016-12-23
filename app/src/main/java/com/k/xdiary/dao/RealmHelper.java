@@ -30,22 +30,11 @@ public class RealmHelper {
 			sum = getSum(weightBean.getWeight(), lastWeight.getWeight());
 		}
 
-		WeightBean sweight = mRealm.where(WeightBean.class).equalTo("date", weightBean.getDate()).findFirst();
 		WeightBean tWeight = mRealm.where(WeightBean.class).greaterThan("date", weightBean.getDate()).findFirst();
 
 		mRealm.beginTransaction();
-
-
-		if (sweight != null) {
-			sweight.setWeight(weightBean.getWeight());
-			sweight.setOther(String.valueOf(weightBean.getOther()));
-			sweight.setRun(String.valueOf(weightBean.getRun()));
-			sweight.setSitup(String.valueOf(weightBean.getSitup()));
-			sweight.setSum(sum);
-		} else {
-			weightBean.setSum(sum);
-			mRealm.copyToRealm(weightBean);
-		}
+		weightBean.setSum(sum);
+		mRealm.copyToRealmOrUpdate(weightBean);
 
 		if (tWeight != null) {
 			tWeight.setSum(getSum(tWeight.getWeight(), weightBean.getWeight()));

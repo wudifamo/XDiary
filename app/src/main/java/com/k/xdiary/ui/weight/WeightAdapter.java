@@ -31,12 +31,12 @@ public class WeightAdapter extends BaseStickyDragAdapter<WeightBean, BaseViewHol
 
     @Override
     protected void convert(BaseViewHolder helper, WeightBean item) {
-        helper.setText(R.id.witem_tv0, item.getStringDate())
-                .setText(R.id.witem_tv2, item.getWeight());
+        helper.setText(R.id.witem_date, item.getEnDate())
+                .setText(R.id.witem_weight, item.getWeight());
         if (item.getSum() > 0) {
-            helper.setText(R.id.witem_tv1, "↑" + item.getSum());
+            helper.setText(R.id.witem_sum, "↑" + item.getSum());
         } else {
-            helper.setText(R.id.witem_tv1, "↓" + item.getSum());
+            helper.setText(R.id.witem_sum, "↓" + item.getSum());
         }
     }
 

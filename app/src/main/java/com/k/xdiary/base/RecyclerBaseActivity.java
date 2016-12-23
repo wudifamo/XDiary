@@ -36,7 +36,7 @@ public class RecyclerBaseActivity extends BaseActivity {
 	public void initView(View view) {
 		mFab = (FloatingActionButton) findViewById(R.id.weight_fb);
 		mFab.setOnClickListener(this);
-		mAdapter.isFirstOnly(false);
+		mAdapter.isFirstOnly(true);
 		recyclerView = (RecyclerView) findViewById(R.id.weight_recyclerview);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setAdapter(mAdapter);
@@ -46,7 +46,7 @@ public class RecyclerBaseActivity extends BaseActivity {
 		ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemDragAndSwipeCallback);
 		mItemTouchHelper.attachToRecyclerView(recyclerView);
 
-		mItemDragAndSwipeCallback.setSwipeMoveFlags(ItemTouchHelper.START | ItemTouchHelper.END);
+		mItemDragAndSwipeCallback.setSwipeMoveFlags( ItemTouchHelper.END);
 		ItemDragAndSwipeCallback itemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mAdapter);
 		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
 		itemTouchHelper.attachToRecyclerView(recyclerView);
