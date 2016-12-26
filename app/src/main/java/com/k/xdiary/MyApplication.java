@@ -2,6 +2,9 @@ package com.k.xdiary;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+
 import io.realm.DynamicRealm;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -26,6 +29,9 @@ public class MyApplication extends Application {
 //				.migration(new MyMigration())
 				.build();
 		Realm.setDefaultConfiguration(config);
+		ImagePipelineConfig frescoConfig = ImagePipelineConfig.newBuilder(this)
+				.setDownsampleEnabled(true).build();
+		Fresco.initialize(this, frescoConfig);
 	}
 
 	public class MyMigration implements RealmMigration {

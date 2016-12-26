@@ -24,8 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.city.AddCityActivity">
-        </activity>
         <activity android:name=".ui.weight.WeightActivity">
         </activity>
         <activity android:name=".ui.weight.AddWeightActivity">

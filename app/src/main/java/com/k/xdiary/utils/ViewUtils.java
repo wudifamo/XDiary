@@ -1,7 +1,12 @@
 package com.k.xdiary.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.k.xdiary.R;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 /**
@@ -38,5 +43,14 @@ public class ViewUtils {
 		}
 	}
 
+	public static Bitmap getLoacalBitmap(String url) {
+		try {
+			FileInputStream fis = new FileInputStream(url);
+			return BitmapFactory.decodeStream(fis);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

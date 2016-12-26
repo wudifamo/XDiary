@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
+import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
 import com.k.xdiary.R;
 import com.k.xdiary.base.BaseActivity;
 
@@ -12,7 +13,9 @@ import java.util.ArrayList;
 
 import io.github.lijunguan.imgselector.ImageSelector;
 
+
 public class AddDiaryActivity extends BaseActivity {
+	private HorizontalInfiniteCycleViewPager horizontalInfiniteCycleViewPager;
 
 	@Override
 	public void initParms(Bundle parms) {
@@ -26,6 +29,7 @@ public class AddDiaryActivity extends BaseActivity {
 	@Override
 	public void initView(View view) {
 		findViewById(R.id.diary_fb).setOnClickListener(this);
+		horizontalInfiniteCycleViewPager = (HorizontalInfiniteCycleViewPager) view.findViewById(R.id.diary_hicvp);
 	}
 
 	@Override
@@ -56,6 +60,7 @@ public class AddDiaryActivity extends BaseActivity {
 			ArrayList<String> imagesPath = data.getStringArrayListExtra(ImageSelector.SELECTED_RESULT);
 			if (imagesPath != null) {
 				//TODO  do something...
+				horizontalInfiniteCycleViewPager.setAdapter(new AddDiaryAlbumAdapter(mContext, imagesPath));
 			}
 		}
 	}
