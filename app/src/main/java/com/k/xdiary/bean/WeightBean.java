@@ -1,6 +1,10 @@
 package com.k.xdiary.bean;
 
+import android.text.TextUtils;
+
+import com.k.xdiary.R;
 import com.k.xdiary.utils.BaseUtils;
+import com.k.xdiary.utils.ViewUtils;
 
 import java.util.Date;
 
@@ -18,10 +22,30 @@ public class WeightBean extends RealmObject {
 	private double run;
 	private double sum;
 	private String other;
-	private int weather;
+	private String weather;
 	private String tmp;
 	@PrimaryKey
 	private long date;
+
+	public int getWeather() {
+		return TextUtils.isEmpty(weather) ? R.drawable.weather_sunny : ViewUtils.getWeatherIcon(weather);
+	}
+
+	public void setWeather(String weather) {
+		this.weather = weather;
+	}
+
+	public String getTmp() {
+		return tmp;
+	}
+
+	public void setTmp(String tmp) {
+		this.tmp = tmp;
+	}
+
+	public void setDate(long date) {
+		this.date = date;
+	}
 
 	public String getWeight() {
 		return weight;

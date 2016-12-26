@@ -43,13 +43,10 @@ public class RecyclerBaseActivity extends BaseActivity {
 		headersDecor = new StickyRecyclerHeadersDecoration(mAdapter);
 		recyclerView.addItemDecoration(headersDecor);
 		ItemDragAndSwipeCallback mItemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mAdapter);
+		mItemDragAndSwipeCallback.setSwipeMoveFlags( ItemTouchHelper.END);
 		ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mItemDragAndSwipeCallback);
 		mItemTouchHelper.attachToRecyclerView(recyclerView);
 
-		mItemDragAndSwipeCallback.setSwipeMoveFlags( ItemTouchHelper.END);
-		ItemDragAndSwipeCallback itemDragAndSwipeCallback = new ItemDragAndSwipeCallback(mAdapter);
-		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemDragAndSwipeCallback);
-		itemTouchHelper.attachToRecyclerView(recyclerView);
 		// 开启拖拽
 //		mWeightAdapter.enableDragItem(false);
 //		mWeightAdapter.setOnItemDragListener(onItemDragListener);
@@ -67,7 +64,7 @@ public class RecyclerBaseActivity extends BaseActivity {
 	}
 
 	public void refreshData() {
-		mAdapter.setEnableLoadMore(false);
-		mAdapter.setEnableLoadMore(true);
+//		mAdapter.setEnableLoadMore(false);
+//		mAdapter.setEnableLoadMore(true);
 	}
 }

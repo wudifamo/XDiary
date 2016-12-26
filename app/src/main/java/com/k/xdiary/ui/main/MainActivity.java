@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 	private DrawerLayout mDrawerLayout;
 	private CollapsingToolbarLayout mCollapsingToolbarLayout;
 	private CardView cardView1, cardView2, cardView3;
+	private String wStr = "", tStr = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,6 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 		mDrawerLayout.addDrawerListener(toggle);
 		toggle.syncState();
 		mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.main_collapsingbar);
-		mCollapsingToolbarLayout.setTitle("6℃");
 		//扩张颜色
 		mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
 		//收缩后在Toolbar上显示时的title的颜色
@@ -165,7 +165,10 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 //				intent.setClass(MainActivity.this, WeightActivity.class);
 //				Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
 //				startActivity(intent, bundle);
-				startActivity(WeightActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("weather", wStr);
+				bundle.putString("tmp", tStr);
+				startActivity(WeightActivity.class, bundle);
 //				startActivity(new Intent(mContext, WeightActivity.class), ActivityOptions.makeSceneTransitionAnimation(this, cardView1, "weight")
 //						.toBundle());
 				break;
@@ -212,6 +215,8 @@ public class MainActivity extends BaseActivity implements AppBarLayout.OnOffsetC
 				WeatherBean.HeWeather5Bean.DailyForecastBean.TmpBean tmpBean = listDaily.get(0).getTmp();
 				main_appbar_tv.setText(tmpBean.getMax() + "/" + tmpBean.getMin());
 				main_qualities.setText("AQI " + aqiBean.getAqi() + "\n" + "PM2.5 " + aqiBean.getPm25());
+				wStr = weather5Bean.getNow().getCond().getTxt();
+				tStr = tmpBean.getMax();
 				setChart(weather5Bean.getDaily_forecast());
 			} else {
 				Snackbar.make(mDrawerLayout, "connection error", Snackbar.LENGTH_LONG).setAction("retry", new View.OnClickListener() {

@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmModel;
+import io.realm.RealmObject;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -40,6 +41,14 @@ public class RealmHelper {
 			tWeight.setSum(getSum(tWeight.getWeight(), weightBean.getWeight()));
 		}
 
+		mRealm.commitTransaction();
+	}
+
+	public static void addRealm(RealmObject obj) {
+
+		Realm mRealm = Realm.getDefaultInstance();
+		mRealm.beginTransaction();
+		mRealm.copyToRealmOrUpdate(obj);
 		mRealm.commitTransaction();
 	}
 

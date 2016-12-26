@@ -49,10 +49,6 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile(name: 'SwipeBackLayout-V1.1.0', ext: 'aar')
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile files('libs/gson-2.3.1.jar')
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.6.6'
@@ -60,4 +56,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.3.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.wdullaer:materialdatetimepicker:3.0.0'
+    compile project(':imageseletor')
 }

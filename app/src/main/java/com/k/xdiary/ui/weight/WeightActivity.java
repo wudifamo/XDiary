@@ -9,7 +9,6 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
@@ -29,10 +28,12 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 	private ArrayList<WeightBean> weightList = new ArrayList<>();
 	private RealmResults<WeightBean> listAll;
 	private LinearLayoutManager layoutManager;
+	private String weather, tmp;
 
 	@Override
 	public void initParms(Bundle parms) {
-
+		weather = parms.getString("weather");
+		tmp = parms.getString("tmp");
 	}
 
 	@Override
@@ -70,12 +71,12 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 			@Override
 			public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 				super.onScrolled(recyclerView, dx, dy);
-				int aa = layoutManager.findFirstVisibleItemPosition();
-				ImageView tv = (ImageView) recyclerView.getChildAt(aa).findViewById(R.id.witem_weather);
-				int[] location = new int[2];
-				// 获取scrollToView在窗体的坐标
-				tv.getLocationInWindow(location);
-				Log.i("---", aa + "-" + location[1] + "-" + dy);
+//				int aa = layoutManager.findFirstVisibleItemPosition();
+//				ImageView tv = (ImageView) recyclerView.getChildAt(aa).findViewById(R.id.witem_weather);
+//				int[] location = new int[2];
+//				// 获取scrollToView在窗体的坐标
+//				tv.getLocationInWindow(location);
+//				Log.i("---", aa + "-" + location[1] + "-" + dy);
 			}
 		});
 	}
@@ -91,6 +92,10 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 			case R.id.weight_fb:
 				Intent intent = new Intent();
 				intent.setClass(mContext, AddWeightActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("weather", weather == null ? "" : weather);
+				bundle.putString("tmp", tmp == null ? "" : tmp);
+				intent.putExtras(bundle);
 				CircularAnimUtil.startActivityForResult(WeightActivity.this, intent, 0, mFab, R.color.colorPrimary);
 				break;
 		}

@@ -21,6 +21,7 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 	private TextView dateTv;
 	private DatePickerDialog dpd;
 	private Button toolbar_btnRight;
+	private String weather, tmp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 		);
 		dpd.setVersion(DatePickerDialog.Version.VERSION_1);
 		dpd.autoDismiss(true);
+		weather = parms.getString("weather");
+		tmp = parms.getString("tmp");
 	}
 
 	@Override
@@ -80,6 +83,10 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 					weightBean.setSitup(sitEt.getText().toString());
 					weightBean.setRun(runEt.getText().toString());
 					weightBean.setOther(otherEt.getText().toString());
+					if (!TextUtils.isEmpty(weather)) {
+						weightBean.setWeather(weather);
+						weightBean.setTmp(tmp);
+					}
 					RealmHelper.addWeight(weightBean);
 					setResult(1);
 					finish();

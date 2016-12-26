@@ -1,14 +1,15 @@
 package com.k.xdiary.ui.diary;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.k.xdiary.base.RecyclerBaseActivity;
-import com.k.xdiary.bean.WeightBean;
+import com.k.xdiary.R;
+import com.k.xdiary.base.BaseActivity;
+import com.k.xdiary.bean.DiaryBean;
 import com.k.xdiary.dao.RealmHelper;
-import com.k.xdiary.ui.weight.WeightAdapter;
 
 import java.util.ArrayList;
 
@@ -16,9 +17,12 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/12/21.
  */
 
-public class DiaryActivity extends RecyclerBaseActivity {
-	private ArrayList<WeightBean> weightList = new ArrayList<>();
+public class DiaryActivity extends BaseActivity {
+	private ArrayList<DiaryBean> diaryList = new ArrayList<>();
 	private StaggeredGridLayoutManager layoutManager;
+	private RecyclerView recyclerView;
+	private DiaryAdapter mAdapter;
+	private int currentPage;
 
 	@Override
 	public void initParms(Bundle parms) {
@@ -26,13 +30,21 @@ public class DiaryActivity extends RecyclerBaseActivity {
 	}
 
 	@Override
+	public int bindLayout() {
+		return R.layout.activity_diary;
+	}
+
+	@Override
 	public void initView(View view) {
-		mAdapter = new WeightAdapter(mContext, weightList);
-		super.initView(view);
+		findViewById(R.id.diary_fb).setOnClickListener(this);
+		mAdapter = new DiaryAdapter(mContext, diaryList);
+		recyclerView = (RecyclerView) findViewById(R.id.diary_recyclerview);
+		recyclerView.setHasFixedSize(true);
+		recyclerView.setAdapter(mAdapter);
+		mAdapter.isFirstOnly(true);
 		layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 		recyclerView.setLayoutManager(layoutManager);
 		mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
-		mAdapter.enableSwipeItem();
 	}
 
 	@Override
@@ -42,14 +54,18 @@ public class DiaryActivity extends RecyclerBaseActivity {
 
 	@Override
 	public void widgetClick(View v) {
+		switch (v.getId()) {
+			case R.id.diary_fb:
+				startActivity(AddDiaryActivity.class);
+				break;
+		}
 
 	}
 
-	@Override
 	public void refreshData() {
-		weightList.clear();
-		weightList.addAll(RealmHelper.queryAllWeight());
-		mAdapter.setNewData(weightList);
-		super.refreshData();
+		currentPage = 0;
+		diaryList.clear();
+		diaryList.addAll(RealmHelper.getLimitList(RealmHelper.queryAll(DiaryBean.class), currentPage, 10));
+		mAdapter.setNewData(diaryList);
 	}
 }
