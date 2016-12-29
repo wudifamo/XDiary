@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -93,6 +94,24 @@ public class BaseUtils {
 		intent.setAction(Intent.ACTION_PICK);
 		intent.setType("image/*");
 		activity.startActivityForResult(intent, 0);
+	}
+
+	public static void saveTodayTmp(Context context, String weather, String tmp) {
+		SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString("weather", weather);
+		editor.putString("tmp", tmp);
+		editor.commit();
+	}
+
+	public static String getTodayWeather(Context context) {
+		SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+		return sp.getString("weather", "");
+	}
+
+	public static String getTodayTmp(Context context) {
+		SharedPreferences sp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+		return sp.getString("tmp", "");
 	}
 
 }

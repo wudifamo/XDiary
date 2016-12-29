@@ -18,6 +18,7 @@ import com.k.xdiary.bean.WeightBean;
 import com.k.xdiary.dao.RealmHelper;
 import com.k.xdiary.utils.BaseUtils;
 import com.k.xdiary.utils.CircularAnimUtil;
+import com.k.xdiary.views.CustomLoadMoreView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,9 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 	private ArrayList<WeightBean> weightList = new ArrayList<>();
 	private RealmResults<WeightBean> listAll;
 	private LinearLayoutManager layoutManager;
-	private String weather, tmp;
 
 	@Override
 	public void initParms(Bundle parms) {
-		weather = parms.getString("weather");
-		tmp = parms.getString("tmp");
 	}
 
 	@Override
@@ -62,6 +60,7 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 		mAdapter.enableSwipeItem();
 		mAdapter.setOnItemSwipeListener(onItemSwipeListener);
 		mAdapter.setOnLoadMoreListener(this);
+		mAdapter.setLoadMoreView(new CustomLoadMoreView());
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -92,10 +91,6 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 			case R.id.weight_fb:
 				Intent intent = new Intent();
 				intent.setClass(mContext, AddWeightActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putString("weather", weather == null ? "" : weather);
-				bundle.putString("tmp", tmp == null ? "" : tmp);
-				intent.putExtras(bundle);
 				CircularAnimUtil.startActivityForResult(WeightActivity.this, intent, 0, mFab, R.color.colorPrimary);
 				break;
 		}
@@ -113,7 +108,7 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 	@Override
 	public void refreshData() {
 		currentPage = 0;
-		listAll = RealmHelper.queryAll(WeightBean.class);
+		listAll = RealmHelper.queryAll(WeightBean.class,"date");
 		weightList.clear();
 		weightList.addAll(RealmHelper.getLimitList(listAll, currentPage, 10));
 		mAdapter.setNewData(weightList);

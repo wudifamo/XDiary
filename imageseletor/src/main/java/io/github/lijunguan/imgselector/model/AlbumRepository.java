@@ -199,7 +199,7 @@ public class AlbumRepository implements AlbumDataSource {
 
     @Override
     public void addSelect(@NonNull String path) {
-        mSelectedResult.add(checkNotNull(path));
+        mSelectedResult.add("file://" +checkNotNull(path));
     }
 
     @Override

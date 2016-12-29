@@ -2,7 +2,14 @@ package com.k.xdiary.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.k.xdiary.R;
 
 import java.io.FileInputStream;
@@ -44,12 +51,29 @@ public class ViewUtils {
 	}
 
 	public static Bitmap getLoacalBitmap(String url) {
+		if (url == null) {
+			return null;
+		}
 		try {
+			url = url.replace("file://", "");
 			FileInputStream fis = new FileInputStream(url);
 			return BitmapFactory.decodeStream(fis);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public static void getFrescoController(SimpleDraweeView imgIv, String uri, int width, int height) {
+		if (uri != null) {
+			ImageRequest request = ImageRequestBuilder
+					.newBuilderWithSource(Uri.parse(uri))
+					.setResizeOptions(new ResizeOptions(width, height))
+					.build();
+			AbstractDraweeController controller = Fresco.newDraweeControllerBuilder().setOldController(imgIv.getController()).setImageRequest
+					(request)
+					.build();
+			imgIv.setController(controller);
 		}
 	}
 

@@ -47,7 +47,7 @@ public class DiaryBean extends RealmObject {
 	}
 
 	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+		this.imgUrl =  imgUrl;
 	}
 
 	public String getTmp() {

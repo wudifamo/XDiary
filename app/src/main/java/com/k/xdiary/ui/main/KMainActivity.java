@@ -18,6 +18,7 @@ import com.k.xdiary.base.BaseActivity;
 import com.k.xdiary.bean.WeatherBean;
 import com.k.xdiary.ui.diary.DiaryActivity;
 import com.k.xdiary.ui.weight.WeightActivity;
+import com.k.xdiary.utils.BaseUtils;
 import com.k.xdiary.utils.HttpUtils;
 import com.k.xdiary.utils.ViewUtils;
 import com.k.xdiary.views.MainParalView;
@@ -42,7 +43,6 @@ public class KMainActivity extends BaseActivity {
 	MainParalView mpv0, mpv1, mpv2;
 	private int mWidth, mHeight;
 	private TextView main_qualities;
-	private String wStr = "", tStr = "";
 	private LineChartView mChart;
 
 	@Override
@@ -88,12 +88,7 @@ public class KMainActivity extends BaseActivity {
 	public void widgetClick(View v) {
 		switch (v.getId()) {
 			case R.id.main_mpv0:
-
-				Bundle bundle = new Bundle();
-				bundle.putString("weather", wStr);
-				bundle.putString("tmp", tStr);
-				startActivity(WeightActivity.class, bundle);
-
+				startActivity(WeightActivity.class);
 				break;
 			case R.id.main_mpv1:
 				startActivity(DiaryActivity.class);
@@ -145,8 +140,7 @@ public class KMainActivity extends BaseActivity {
 				WeatherBean.HeWeather5Bean.DailyForecastBean.TmpBean tmpBean = listDaily.get(0).getTmp();
 				tmpmmTv.setText(tmpBean.getMax() + "/" + tmpBean.getMin());
 				main_qualities.setText("AQI " + aqiBean.getAqi() + "\n" + "PM2.5 " + aqiBean.getPm25());
-				wStr = weather5Bean.getNow().getCond().getTxt();
-				tStr = tmpBean.getMax();
+				BaseUtils.saveTodayTmp(mContext, weather5Bean.getNow().getCond().getTxt(), tmpBean.getMax());
 				setChart(weather5Bean.getDaily_forecast());
 
 				ViewAnimator.animate(findViewById(R.id.main_tmp_rl))

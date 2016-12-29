@@ -91,10 +91,10 @@ public class RealmHelper {
 		return sum;
 	}
 
-	public static <E extends RealmModel> RealmResults<E> queryAll(Class<E> eClass) {
+	public static <E extends RealmModel> RealmResults<E> queryAll(Class<E> eClass,String sortBy) {
 		Realm mRealm = Realm.getDefaultInstance();
 		RealmResults<E> weightList = mRealm.where(eClass).findAll();
-		weightList = weightList.sort("date", Sort.DESCENDING);
+		weightList = weightList.sort(sortBy, Sort.DESCENDING);
 		return weightList;
 	}
 

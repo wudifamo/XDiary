@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:gravity="right"
-        android:text="April 10"/>
+        android:gravity="right"/>
 
     <View
         android:id="@+id/witem_line"
@@ -45,15 +44,13 @@
         <TextView
             android:id="@+id/witem_weight"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="77.5"/>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/witem_sum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="3"/>
+            android:gravity="center"/>
     </LinearLayout>
 
 

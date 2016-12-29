@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_diary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.k.xdiary.ui.diary.AddDiaryActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/toolbar_layout"/>
-
+    <!--
         <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
             android:id="@+id/diary_hicvp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             app:icvp_center_page_scale_offset="30dp"
             app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
             app:icvp_max_page_scale="0.8"
@@ -26,18 +19,38 @@
             app:icvp_min_page_scale="0.55"
             app:icvp_min_page_scale_offset="5dp"
             app:icvp_scroll_duration="250"/>
+    -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/adddiary_title"
-            style="@style/addweatherEditText"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:hint="title"/>
+        <include layout="@layout/toolbar_layout"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/adddiary_content"
-            style="@style/addweatherEditText"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:hint="title"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/adddiary_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:gravity="center_horizontal"/>
+
+            <FrameLayout
+                android:id="@+id/adddiary_imgs_fl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp">
+
+
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
 

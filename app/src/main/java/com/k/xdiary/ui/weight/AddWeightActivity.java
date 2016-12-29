@@ -3,7 +3,6 @@ package com.k.xdiary.ui.weight;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,6 +10,7 @@ import com.k.xdiary.R;
 import com.k.xdiary.base.BaseActivity;
 import com.k.xdiary.bean.WeightBean;
 import com.k.xdiary.dao.RealmHelper;
+import com.k.xdiary.utils.BaseUtils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
@@ -20,8 +20,6 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 	private EditText weightEt, sitEt, runEt, otherEt;
 	private TextView dateTv;
 	private DatePickerDialog dpd;
-	private Button toolbar_btnRight;
-	private String weather, tmp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +37,6 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 		);
 		dpd.setVersion(DatePickerDialog.Version.VERSION_1);
 		dpd.autoDismiss(true);
-		weather = parms.getString("weather");
-		tmp = parms.getString("tmp");
 	}
 
 	@Override
@@ -51,7 +47,6 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 	@Override
 	public void initView(View view) {
 		dateTv = (TextView) findViewById(R.id.addweight_datetv);
-		toolbar_btnRight = (Button) findViewById(R.id.toolbar_btnRight);
 		weightEt = (EditText) findViewById(R.id.addweight_weight);
 		sitEt = (EditText) findViewById(R.id.addweight_situp);
 		runEt = (EditText) findViewById(R.id.addweight_run);
@@ -64,7 +59,6 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 		dateTv.setText(formatDate(dpd.getSelectedDay().getYear(), dpd.getSelectedDay().getMonth(), dpd.getSelectedDay().getDay()));
 		toolbar_btnRight.setText("done");
 		toolbar_btnRight.setVisibility(View.VISIBLE);
-		toolbar_btnRight.setOnClickListener(this);
 	}
 
 	@Override
@@ -83,10 +77,8 @@ public class AddWeightActivity extends BaseActivity implements DatePickerDialog.
 					weightBean.setSitup(sitEt.getText().toString());
 					weightBean.setRun(runEt.getText().toString());
 					weightBean.setOther(otherEt.getText().toString());
-					if (!TextUtils.isEmpty(weather)) {
-						weightBean.setWeather(weather);
-						weightBean.setTmp(tmp);
-					}
+					weightBean.setWeather(BaseUtils.getTodayWeather(mContext));
+					weightBean.setTmp(BaseUtils.getTodayTmp(mContext));
 					RealmHelper.addWeight(weightBean);
 					setResult(1);
 					finish();

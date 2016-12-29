@@ -39,4 +39,9 @@
         <attr name="text_content" format="string"/>
         <attr name="para_height" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="BlurredView">
+        <attr name="src" format="reference"/>
+        <attr name="disableBlurred" format="boolean"/>
+    </declare-styleable>
 </resources>
