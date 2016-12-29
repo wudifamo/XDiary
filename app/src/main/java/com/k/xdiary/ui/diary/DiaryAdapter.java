@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.k.xdiary.R;
 import com.k.xdiary.bean.DiaryBean;
-import com.k.xdiary.utils.ViewUtils;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,10 @@ public class DiaryAdapter extends BaseQuickAdapter<DiaryBean, BaseViewHolder> {
 	@Override
 	protected void convert(BaseViewHolder helper, DiaryBean item) {
 		helper.setText(R.id.diary_item_title, item.getContent());
-		ViewUtils.getFrescoController((SimpleDraweeView) helper.getView(R.id.diary_item_simpleDraweeView), item.getImgUrl(), 300, 200);
+		SimpleDraweeView pic = helper.getView(R.id.diary_item_simpleDraweeView);
+		pic.setAspectRatio(0.9f);
+		pic.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER);
+		//ViewUtils.getFrescoController(pic, item.getImgUrl(), 300, 200);
 	}
 
 }

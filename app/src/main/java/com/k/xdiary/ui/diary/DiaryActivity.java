@@ -52,11 +52,11 @@ public class DiaryActivity extends BaseActivity implements BaseQuickAdapter.Requ
 		recyclerView.setAdapter(mAdapter);
 		mAdapter.isFirstOnly(true);
 		layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-		recyclerView.addItemDecoration(new StaItemDecorator(60));
 		recyclerView.setLayoutManager(layoutManager);
 		mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
 		mAdapter.setOnLoadMoreListener(this);
 		mAdapter.setLoadMoreView(new CustomLoadMoreView());
+//		recyclerView.addItemDecoration(new StaItemDecorator(60));
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class DiaryActivity extends BaseActivity implements BaseQuickAdapter.Requ
 
 	public void refreshData() {
 		currentPage = 0;
-		listAll = RealmHelper.queryAll(DiaryBean.class,"id");
+		listAll = RealmHelper.queryAll(DiaryBean.class, "id");
 		diaryList.clear();
 		diaryList.addAll(RealmHelper.getLimitList(listAll, currentPage, 10));
 		mAdapter.setNewData(diaryList);
