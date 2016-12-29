@@ -18,11 +18,6 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/Theme.AppStartLoadTranslucent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".ui.weight.WeightActivity">
         </activity>
@@ -31,6 +26,14 @@
         <activity android:name=".ui.diary.DiaryActivity">
         </activity>
         <activity android:name=".ui.diary.AddDiaryActivity">
+        </activity>
+        <activity android:name=".ui.main.KMainActivity"
+                  android:theme="@style/Theme.AppStartLoadTranslucent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:id="@+id/header_background"
-    android:background="@mipmap/header_back"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:gravity="bottom">
 

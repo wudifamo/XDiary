@@ -14,8 +14,17 @@ public class DiaryBean extends RealmObject {
 	private String imgUrl;
 	private String tmp;
 	private String weather;
-	@PrimaryKey
 	private String date;
+	@PrimaryKey
+	private long id;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;

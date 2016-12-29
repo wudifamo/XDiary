@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:paral="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_kmain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.k.xdiary.ui.main.KMainActivity">
+
+    <RelativeLayout
+        android:id="@+id/main_tmp_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-100dp">
+
+        <TextView
+            android:id="@+id/main_tmp_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6℃"
+            android:textSize="28sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/main_tmpmm_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_tmp_tv"
+            android:text="17/10"/>
+
+        <TextView
+            android:id="@+id/main_qualities_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/main_tmpmm_tv"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/main_tmpmm_tv"
+            android:gravity="right"
+            android:text="aaa df\naaa dff"/>
+
+    </RelativeLayout>
+
+    <com.k.xdiary.views.MainParalView
+        android:id="@+id/main_mpv0"
+        style="@style/main_paraStyle"
+        app:layout_marginBottomPercent="170%w"
+        paral:text_content="weight"/>
+
+    <com.k.xdiary.views.MainParalView
+        android:id="@+id/main_mpv1"
+        style="@style/main_paraStyle"
+        app:layout_marginBottomPercent="130%w"
+        paral:text_content="diary"/>
+
+    <com.k.xdiary.views.MainParalView
+        android:id="@+id/main_mpv2"
+        style="@style/main_paraStyle"
+        app:layout_marginBottomPercent="90%w"
+        paral:text_content="weather"/>
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/weather_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="-70dp"
+        android:background="@color/transparent"
+        android:elevation="2dp"/>
+</com.zhy.android.percent.support.PercentFrameLayout>

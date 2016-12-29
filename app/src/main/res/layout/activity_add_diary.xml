@@ -8,17 +8,38 @@
     android:layout_height="match_parent"
     tools:context="com.k.xdiary.ui.diary.AddDiaryActivity">
 
-    <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-        android:id="@+id/diary_hicvp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:icvp_center_page_scale_offset="30dp"
-        app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
-        app:icvp_max_page_scale="0.8"
-        app:icvp_medium_scaled="false"
-        app:icvp_min_page_scale="0.55"
-        app:icvp_min_page_scale_offset="5dp"
-        app:icvp_scroll_duration="250"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_layout"/>
+
+        <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+            android:id="@+id/diary_hicvp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:icvp_center_page_scale_offset="30dp"
+            app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
+            app:icvp_max_page_scale="0.8"
+            app:icvp_medium_scaled="false"
+            app:icvp_min_page_scale="0.55"
+            app:icvp_min_page_scale_offset="5dp"
+            app:icvp_scroll_duration="250"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/adddiary_title"
+            style="@style/addweatherEditText"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:hint="title"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/adddiary_content"
+            style="@style/addweatherEditText"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:hint="title"/>
+    </LinearLayout>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/diary_fb"

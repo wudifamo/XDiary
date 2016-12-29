@@ -85,20 +85,6 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
             }
             mSwipeBackLayout = getSwipeBackLayout();
             mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
-            mSwipeBackLayout.addSwipeListener(new SwipeBackLayout.SwipeListener() {
-                @Override
-                public void onScrollStateChange(int state, float scrollPercent) {
-
-                }
-
-                @Override
-                public void onEdgeTouch(int edgeFlag) {
-                }
-
-                @Override
-                public void onScrollOverThreshold() {
-                }
-            });
             initView(mContextView);
             doBusiness();
 
