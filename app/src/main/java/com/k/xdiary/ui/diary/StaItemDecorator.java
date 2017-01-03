@@ -20,11 +20,9 @@ public class StaItemDecorator extends RecyclerView.ItemDecoration {
 	@Override
 	public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
 //        super.getItemOffsets(outRect, view, parent, state);
-		outRect.bottom = space;
+		//	outRect.bottom = space;
 		outRect.right = space;
-		outRect.left = space;
-		if (parent.getChildAdapterPosition(view) > 1) {
-			outRect.top = space;
-		}
+//		outRect.left = space;
+		outRect.top = space;
 	}
 }

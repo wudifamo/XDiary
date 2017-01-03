@@ -2,6 +2,7 @@ package com.k.xdiary.ui.weight;
 
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,11 +25,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.RealmResults;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.view.LineChartView;
 
 public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAdapter.RequestLoadMoreListener {
 	private ArrayList<WeightBean> weightList = new ArrayList<>();
 	private RealmResults<WeightBean> listAll;
 	private LinearLayoutManager layoutManager;
+	private LineChartView mChart;
 
 	@Override
 	public void initParms(Bundle parms) {
@@ -61,6 +70,7 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 		mAdapter.setOnItemSwipeListener(onItemSwipeListener);
 		mAdapter.setOnLoadMoreListener(this);
 		mAdapter.setLoadMoreView(new CustomLoadMoreView());
+		mChart = (LineChartView) view.findViewById(R.id.weather_chart);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -108,10 +118,11 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 	@Override
 	public void refreshData() {
 		currentPage = 0;
-		listAll = RealmHelper.queryAll(WeightBean.class,"date");
+		listAll = RealmHelper.queryAll(WeightBean.class, "date");
 		weightList.clear();
 		weightList.addAll(RealmHelper.getLimitList(listAll, currentPage, 10));
 		mAdapter.setNewData(weightList);
+		setChart();
 		super.refreshData();
 	}
 
@@ -156,6 +167,7 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 					mAdapter.loadMoreEnd();
 				} else {
 					mAdapter.addData(weightBeanList);
+					setChart();
 					mAdapter.loadMoreComplete();
 				}
 			}
@@ -163,4 +175,40 @@ public class WeightActivity extends RecyclerBaseActivity implements BaseQuickAda
 
 	}
 
+	private void setChart() {
+		List<PointValue> values = new ArrayList<PointValue>();
+		List<AxisValue> mAxisValues = new ArrayList<AxisValue>();
+		for (int i = 0; i < weightList.size(); i++) {
+			WeightBean dailyForecastBean = weightList.get(i);
+			values.add(new PointValue(i, Float.parseFloat(dailyForecastBean.getWeight())));
+			mAxisValues.add(new AxisValue(i).setLabel(dailyForecastBean.getStringDate().substring(5)));
+		}
+		Line line = new Line(values);
+		line.setColor(Color.BLACK);
+		line.setStrokeWidth(1);
+		line.setCubic(true);
+		line.setHasPoints(false);
+		List<Line> lines = new ArrayList<Line>();
+		lines.add(line);
+		LineChartData data = new LineChartData();
+		data.setLines(lines);
+
+		Axis axisX = new Axis();
+		axisX.setValues(mAxisValues);
+		axisX.setHasSeparationLine(false);
+		data.setAxisXBottom(axisX);
+
+
+		data.setBaseValue(Float.NEGATIVE_INFINITY);
+		mChart.setLineChartData(data);
+		final Viewport v = new Viewport(mChart.getMaximumViewport());
+		v.left = -1;                             //坐标原点在左下
+		v.bottom = v.bottom - 7;
+		v.top = v.top + 7;                            //最高点为100
+		v.right = v.right + 1;           //右边为点 坐标从0开始 点号从1 需要 -1
+		mChart.setMaximumViewport(v);   //给最大的视图设置 相当于原图
+		mChart.setInteractive(false);
+//		mChart.setCurrentViewport(v);
+		mChart.setCurrentViewportWithAnimation(v);
+	}
 }

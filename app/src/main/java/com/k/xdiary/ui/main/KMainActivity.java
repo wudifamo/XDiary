@@ -93,14 +93,15 @@ public class KMainActivity extends BaseActivity {
 			case R.id.main_mpv1:
 				startActivity(DiaryActivity.class);
 				break;
+			case R.id.main_mpv2:
+				break;
 		}
 	}
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		ViewAnimator.animate(mpv0)
-				.translationX(-mWidth * 1.3f)
+		ViewAnimator.animate(mpv0).translationX(-mWidth * 1.3f)
 				.translationY(mWidth * 1.3f)
 				.interpolator(new OvershootInterpolator())
 				.startDelay(200)
@@ -110,14 +111,12 @@ public class KMainActivity extends BaseActivity {
 				.translationY(mWidth * 1.3f)
 				.interpolator(new OvershootInterpolator())
 				.duration(700)
-				.andAnimate(mpv2)
 				.startDelay(400)
 				.start();
 		ViewAnimator.animate(mpv2).translationX(-mWidth * 1.3f)
 				.translationY(mWidth * 1.3f)
 				.interpolator(new OvershootInterpolator())
 				.duration(700)
-				.andAnimate(mpv2)
 				.startDelay(600)
 				.start();
 	}
@@ -166,8 +165,8 @@ public class KMainActivity extends BaseActivity {
 	};
 
 	private void setChart(List<WeatherBean.HeWeather5Bean.DailyForecastBean> dailyList) {
-		List<PointValue> values = new ArrayList<PointValue>();
-		List<AxisValue> mAxisValues = new ArrayList<AxisValue>();
+		List<PointValue> values = new ArrayList<>();
+		List<AxisValue> mAxisValues = new ArrayList<>();
 		for (int i = 0; i < dailyList.size(); i++) {
 			WeatherBean.HeWeather5Bean.DailyForecastBean dailyForecastBean = dailyList.get(i);
 			values.add(new PointValue(i, Float.parseFloat(dailyForecastBean.getTmp().getMax())));
@@ -178,7 +177,7 @@ public class KMainActivity extends BaseActivity {
 		line.setStrokeWidth(1);
 		line.setCubic(true);
 		line.setHasPoints(false);
-		List<Line> lines = new ArrayList<Line>();
+		List<Line> lines = new ArrayList<>();
 		lines.add(line);
 		LineChartData data = new LineChartData();
 		data.setLines(lines);

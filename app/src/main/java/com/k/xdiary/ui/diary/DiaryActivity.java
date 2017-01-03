@@ -56,7 +56,7 @@ public class DiaryActivity extends BaseActivity implements BaseQuickAdapter.Requ
 		mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
 		mAdapter.setOnLoadMoreListener(this);
 		mAdapter.setLoadMoreView(new CustomLoadMoreView());
-//		recyclerView.addItemDecoration(new StaItemDecorator(60));
+		recyclerView.addItemDecoration(new StaItemDecorator(BaseUtils.dip2px(mContext,16)));
 	}
 
 	@Override
